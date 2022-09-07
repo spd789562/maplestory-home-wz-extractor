@@ -56,4 +56,9 @@ export default {
   FurnitureWzFile: 'Item.wz',
   FurniturePath: 'Consume',
   FurnitureTypes: ['0267.img'],
+
+  StringOutput: 'string',
+  StringWzFile: 'String.wz',
+  StringPath: 'Consume',
+  StringTypes: ['Consume.img'],
 } as const;

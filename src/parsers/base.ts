@@ -14,6 +14,7 @@ import {
   walkPropertyContainer,
 } from '@tybys/wz';
 import path from 'path';
+import fs from 'fs';
 import Config from '../../config';
 
 function preventBigIntSave(value: any) {
@@ -53,6 +54,9 @@ class ParserBase {
     this.wzName = wzName;
     this.wzPath = wzPath;
     this._reduentPath = '';
+    if (!fs.existsSync(wzPath)) {
+      throw new Error(`${wzPath} not exist`);
+    }
   }
   async initialize() {
     this._wz = new WzFile(this.wzPath, Config.WZ_VERSION);

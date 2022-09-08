@@ -10,7 +10,7 @@ const wzPath = path.join(Config.WZ_SOURCE, Config.FurnitureWzFile);
 function parseImageName(name: string) {
   return name
     .replace(Config.WZ_SOURCE.replace(/^\.\//, '') + '\\', '')
-    .replace('Item.wz', 'Item')
+    .replace(Config.FurnitureWzFile, 'Item-Consume')
     .replace(/\\(\\)?/g, '-');
 }
 
@@ -47,11 +47,16 @@ class FurnitureParser extends ParserBase {
     }
   }
   imageCallback(name: string, bitmap: any) {
+    const saveName = parseImageName(name);
+    if (
+      (!saveName.includes('img-02671') && !saveName.includes('img-02672')) ||
+      saveName.includes('-info-iconRaw')
+    ) {
+      return;
+    }
     bitmap &&
       bitmap.writeAsync &&
-      bitmap.writeAsync(
-        path.join(this.saveImageRoot, `${parseImageName(name)}.png`)
-      );
+      bitmap.writeAsync(path.join(this.saveImageRoot, `${saveName}.png`));
   }
 }
 

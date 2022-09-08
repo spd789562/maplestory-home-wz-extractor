@@ -10,7 +10,7 @@ const wzPath = path.join(Config.WZ_SOURCE, Config.MapBackWzFile);
 function parseImageName(name: string) {
   return name
     .replace(Config.WZ_SOURCE.replace(/^\.\//, '') + '\\', '')
-    .replace('Map2.wz', 'Map2')
+    .replace(Config.MapBackWzFile, 'Map2-Back')
     .replace(/\\(\\)?/g, '-');
 }
 
@@ -39,7 +39,6 @@ class MapBackParser extends ParserBase {
     }
   }
   imageCallback(name: string, bitmap: any) {
-    console.log(name);
     bitmap &&
       bitmap.writeAsync &&
       bitmap.writeAsync(

@@ -204,9 +204,6 @@ class ParserBase {
               }
             // return false;
           }
-        case WzObjectType.List:
-          addToPath(tree, _basePath, []);
-          break;
       }
 
       if ((obj as WzImageProperty).propertyType === WzPropertyType.Canvas) {

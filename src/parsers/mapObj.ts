@@ -10,9 +10,11 @@ const wzPath = path.join(Config.WZ_SOURCE, Config.MapObjWzFile);
 function parseImageName(name: string) {
   return name
     .replace(Config.WZ_SOURCE.replace(/^\.\//, '') + '\\', '')
-    .replace('Map2.wz', 'Map2')
+    .replace(Config.MapObjWzFile, 'Map2-Obj')
     .replace(/\\(\\)?/g, '-');
 }
+
+const ignoreList = ['direction', 'kennethHouse', 'jeffreyHouse', 'construct'];
 
 class MapObjParser extends ParserBase {
   saveRoot: string;
@@ -36,7 +38,7 @@ class MapObjParser extends ParserBase {
       const typeJson = await this.getJson(wzPath);
       delete typeJson.Obj;
       delete typeJson.direction;
-      delete typeJson.Plaza;
+      // delete typeJson.Plaza;
       delete typeJson.kennethHouse;
       delete typeJson.jeffreyHouse;
       delete typeJson.construct;
@@ -44,11 +46,13 @@ class MapObjParser extends ParserBase {
     }
   }
   imageCallback(name: string, bitmap: any) {
+    const saveName = parseImageName(name);
+    if (ignoreList.some((item) => saveName.includes(`.img-${item}`))) {
+      return;
+    }
     bitmap &&
       bitmap.writeAsync &&
-      bitmap.writeAsync(
-        path.join(this.saveImageRoot, `${parseImageName(name)}.png`)
-      );
+      bitmap.writeAsync(path.join(this.saveImageRoot, `${saveName}.png`));
   }
 }
 

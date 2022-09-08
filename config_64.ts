@@ -58,12 +58,12 @@ export default {
   FurniturePath: '',
   FurnitureTypes: ['0267.img'],
 
-  StringOutput: 'string',
+  StringOutput: 'furniture-string',
   StringWzFile: 'String.wz',
   StringPath: 'Consume',
   StringTypes: ['Consume.img'],
 
-  ThemeOutput: 'theme',
+  ThemeOutput: 'map-theme',
   ThemeWzFile: 'Etc\\Etc_003.wz',
   ThemePath: 'Construction',
   ThemeTypes: ['myHome.img'],

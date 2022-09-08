@@ -61,4 +61,9 @@ export default {
   StringWzFile: 'String.wz',
   StringPath: 'Consume',
   StringTypes: ['Consume.img'],
+
+  ThemeOutput: 'theme',
+  ThemeWzFile: 'Etc.wz',
+  ThemePath: 'Construction',
+  ThemeTypes: ['myHome.img'],
 } as const;

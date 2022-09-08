@@ -90,6 +90,9 @@ class ParserBase {
   getObjectFromRoot(path: string) {
     return this._wz.getObjectFromPath('trashpath/' + path, false);
   }
+  imageCallback(name: string, bitmap: any) {
+    // console.log('need to implement imageCallback');
+  }
   async getImages(startAt?: string, callback?: any) {
     let images: any[] = [];
     const root = startAt
@@ -199,12 +202,26 @@ class ParserBase {
                 }
                 addToPath(tree, _basePath, _val);
               }
-              return false;
+            // return false;
           }
         case WzObjectType.List:
           addToPath(tree, _basePath, []);
           break;
       }
+
+      if ((obj as WzImageProperty).propertyType === WzPropertyType.Canvas) {
+        const getBitmap = async (obj: WzCanvasProperty) => {
+          if (obj.haveInlinkProperty() || obj.haveOutlinkProperty()) {
+            return await obj.getLinkedWzCanvasBitmap();
+          }
+          return await obj.getBitmap();
+        };
+        const bitmap = await getBitmap(obj as WzCanvasProperty);
+        if (bitmap) {
+          this.imageCallback(obj.fullPath, bitmap);
+        }
+      }
+
       return false;
     });
     return tree;

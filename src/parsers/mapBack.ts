@@ -30,27 +30,21 @@ class MapBackParser extends ParserBase {
     fs.mkdirSync(this.saveRoot, { recursive: true });
     for await (const typeName of Config.MapBackTypes) {
       const savePath = path.join(this.saveRoot, `${typeName}.json`);
-      const wzPath = Config.MapBackPath + '\\' + typeName;
+      const wzPath = Config.MapBackPath
+        ? `${Config.MapBackPath}\\${typeName}`
+        : typeName;
       const typeJson = await this.getJson(wzPath);
       delete typeJson.Back;
       fs.writeFileSync(savePath, JSON.stringify(typeJson, null, 2));
     }
   }
-  async saveImage() {
-    for await (const typeName of Config.MapBackTypes) {
-      const wzPath = Config.MapBackPath + '\\' + typeName;
-      await this.getImages(wzPath, (name: any, bitmap: any) => {
-        bitmap &&
-          bitmap.writeAsync &&
-          bitmap.writeAsync(
-            path.join(
-              this.saveImageRoot,
-              typeName,
-              `${parseImageName(name)}.png`
-            )
-          );
-      });
-    }
+  imageCallback(name: string, bitmap: any) {
+    console.log(name);
+    bitmap &&
+      bitmap.writeAsync &&
+      bitmap.writeAsync(
+        path.join(this.saveImageRoot, `${parseImageName(name)}.png`)
+      );
   }
 }
 

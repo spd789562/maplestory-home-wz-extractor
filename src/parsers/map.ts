@@ -17,7 +17,9 @@ class MapParser extends ParserBase {
     fs.mkdirSync(this.saveRoot, { recursive: true });
     for await (const typeName of Config.HouseTypes) {
       const savePath = path.join(this.saveRoot, `${typeName}.json`);
-      const wzPath = Config.HouseTypePath + '\\' + typeName;
+      const wzPath = Config.HouseTypePath
+        ? `${Config.HouseTypePath}\\${typeName}`
+        : typeName;
       const typeJson = await this.getJson(wzPath);
       fs.writeFileSync(savePath, JSON.stringify(typeJson, null, 2));
     }

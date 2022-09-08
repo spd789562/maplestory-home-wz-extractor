@@ -30,7 +30,9 @@ class MapObjParser extends ParserBase {
     fs.mkdirSync(this.saveRoot, { recursive: true });
     for await (const typeName of Config.MapObjTypes) {
       const savePath = path.join(this.saveRoot, `${typeName}.json`);
-      const wzPath = Config.MapObjPath + '\\' + typeName;
+      const wzPath = Config.MapObjPath
+        ? `${Config.MapObjPath}\\${typeName}`
+        : typeName;
       const typeJson = await this.getJson(wzPath);
       delete typeJson.Obj;
       delete typeJson.direction;
@@ -41,17 +43,12 @@ class MapObjParser extends ParserBase {
       fs.writeFileSync(savePath, JSON.stringify(typeJson, null, 2));
     }
   }
-  async saveImage() {
-    for await (const typeName of Config.MapObjTypes) {
-      const wzPath = Config.MapObjPath + '\\' + typeName;
-      await this.getImages(wzPath, (name: any, bitmap: any) => {
-        bitmap &&
-          bitmap.writeAsync &&
-          bitmap.writeAsync(
-            path.join(this.saveImageRoot, `${parseImageName(name)}.png`)
-          );
-      });
-    }
+  imageCallback(name: string, bitmap: any) {
+    bitmap &&
+      bitmap.writeAsync &&
+      bitmap.writeAsync(
+        path.join(this.saveImageRoot, `${parseImageName(name)}.png`)
+      );
   }
 }
 

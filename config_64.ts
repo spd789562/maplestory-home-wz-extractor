@@ -59,7 +59,7 @@ export default {
   FurnitureTypes: ['0267.img'],
 
   StringOutput: 'furniture-string',
-  StringWzFile: 'String.wz',
+  StringWzFile: 'String_000.wz',
   StringPath: 'Consume',
   StringTypes: ['Consume.img'],
 

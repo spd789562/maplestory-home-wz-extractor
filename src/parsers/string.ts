@@ -20,7 +20,11 @@ class StringParser extends ParserBase {
     const wzPath = typeName;
     const typeJson = await this.getJson(wzPath);
     Object.keys(typeJson).forEach((key) => {
-      if (!key.startsWith('2671') && !key.startsWith('2672')) {
+      if (
+        !key.startsWith('2670') &&
+        !key.startsWith('2671') &&
+        !key.startsWith('2672')
+      ) {
         delete typeJson[key];
       }
     });

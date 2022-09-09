@@ -8,35 +8,35 @@ import ThemeParser from './src/parsers/theme';
 // import TestParser from './src/parsers/test';
 
 async function job() {
-  // const mapWz = new MapParser();
-  // await mapWz.initialize();
-  // await mapWz.saveJson();
-  // mapWz.dispose();
+  const mapWz = new MapParser();
+  await mapWz.initialize();
+  await mapWz.saveJson();
+  mapWz.dispose();
 
-  // const mapBackWz = new MapBackParser();
-  // await mapBackWz.initialize();
-  // await mapBackWz.saveJson();
-  // mapBackWz.dispose();
+  const mapBackWz = new MapBackParser();
+  await mapBackWz.initialize();
+  await mapBackWz.saveJson();
+  mapBackWz.dispose();
 
-  // const mapObjWz = new MapObjParser();
-  // await mapObjWz.initialize();
-  // await mapObjWz.saveJson();
-  // mapObjWz.dispose();
+  const mapObjWz = new MapObjParser();
+  await mapObjWz.initialize();
+  await mapObjWz.saveJson();
+  mapObjWz.dispose();
 
-  // const furnitureWz = new FurnitureParser();
-  // await furnitureWz.initialize();
-  // await furnitureWz.saveJson();
-  // furnitureWz.dispose();
+  const furnitureWz = new FurnitureParser();
+  await furnitureWz.initialize();
+  await furnitureWz.saveJson();
+  furnitureWz.dispose();
 
   const stringWz = new StringParser();
   await stringWz.initialize();
   await stringWz.saveJson();
   stringWz.dispose();
 
-  // const themeWz = new ThemeParser();
-  // await themeWz.initialize();
-  // await themeWz.saveJson();
-  // themeWz.dispose();
+  const themeWz = new ThemeParser();
+  await themeWz.initialize();
+  await themeWz.saveJson();
+  themeWz.dispose();
 
   return true;
 }

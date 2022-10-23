@@ -37,6 +37,9 @@ export default {
     '871100025.img',
     '871100026.img',
     '871100027.img',
+    '871100028.img',
+    '871100029.img',
+    '871100030.img',
   ],
   MapBackOutput: 'map-back',
   MapBackWzFile: 'Map\\Back\\Back_009.wz',
@@ -51,15 +54,25 @@ export default {
   MapObjOutput: 'map-object',
   MapObjWzFile: 'Map\\Obj\\Obj_016.wz',
   MapObjPath: '',
-  MapObjTypes: ['myHome.img', 'myHome2.img'],
+  MapObjTypes: ['myHome.img'],
+
+  Map2ObjOutput: 'map-object',
+  Map2ObjWzFile: 'Map\\Obj\\Obj_017.wz',
+  Map2ObjPath: '',
+  Map2ObjTypes: ['myHome2.img'],
 
   FurnitureOutput: 'furniture',
   FurnitureWzFile: 'Item\\Consume\\Consume_000.wz',
   FurniturePath: '',
   FurnitureTypes: ['0267.img'],
 
+  ThemeUIOutput: 'theme-ui',
+  ThemeUIWzFile: 'Item\\Consume\\Consume_000.wz',
+  ThemeUIPath: '',
+  ThemeUITypes: ['0267.img'],
+
   StringOutput: 'furniture-string',
-  StringWzFile: 'String_000.wz',
+  StringWzFile: 'String\\String_000.wz',
   StringPath: 'Consume',
   StringTypes: ['Consume.img'],
 

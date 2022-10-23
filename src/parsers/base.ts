@@ -105,10 +105,17 @@ class ParserBase {
     await walkfunc(root as any, async (obj: any) => {
       if (obj.propertyType === WzPropertyType.Canvas) {
         const getBitmap = async (obj: WzCanvasProperty) => {
-          if (obj.haveInlinkProperty() || obj.haveOutlinkProperty()) {
-            return await obj.getLinkedWzCanvasBitmap();
+          let img = null;
+          try {
+            if (obj.haveInlinkProperty() || obj.haveOutlinkProperty()) {
+              img = await obj.getLinkedWzCanvasBitmap();
+            } else {
+              img = await obj.getBitmap();
+            }
+          } catch (e) {
+            // console.log(e);
           }
-          return await obj.getBitmap();
+          return img;
         };
         const bitmap = await getBitmap(obj as WzCanvasProperty);
         if (bitmap) {
@@ -130,6 +137,10 @@ class ParserBase {
     const root = startAt
       ? (this.getObjectFromRoot(startAt) as WzImage)
       : this._root;
+    if (!root) {
+      console.log('[ERROR] root not found', startAt);
+      return tree;
+    }
     const walkfunc =
       root.objectType === WzObjectType.Directory
         ? walkDirectory
@@ -208,10 +219,18 @@ class ParserBase {
 
       if ((obj as WzImageProperty).propertyType === WzPropertyType.Canvas) {
         const getBitmap = async (obj: WzCanvasProperty) => {
-          if (obj.haveInlinkProperty() || obj.haveOutlinkProperty()) {
-            return await obj.getLinkedWzCanvasBitmap();
-          }
-          return await obj.getBitmap();
+          let img = null;
+          try {
+            if (obj.haveInlinkProperty() || obj.haveOutlinkProperty()) {
+              img = await obj.getLinkedWzCanvasBitmap();
+            }
+          } catch (e) {}
+          try {
+            if (!img) {
+              img = await obj.getBitmap();
+            }
+          } catch (e) {}
+          return img;
         };
         const bitmap = await getBitmap(obj as WzCanvasProperty);
         if (bitmap) {

@@ -1,12 +1,13 @@
 import { WzMapleVersion } from '@tybys/wz';
+import path from 'path';
 
 export default {
-  WZ_SOURCE: './wzSource',
+  WZ_SOURCE: path.join(__dirname, '../wzSource/Data'),
   WZ_VERSION: WzMapleVersion.BMS,
   OUTPUT_ROOT: './output',
 
   MapOutput: 'map',
-  HouseMapWzFile: 'Map\\Map\\Map8\\Map8_000.wz',
+  HouseMapWzFile: 'Map\\Map\\Map8',
   HouseTypePath: '',
   HouseTypes: [
     '871100000.img',
@@ -40,9 +41,12 @@ export default {
     '871100028.img',
     '871100029.img',
     '871100030.img',
+    '871100031.img',
+    '871100032.img',
+    '871100033.img',
   ],
   MapBackOutput: 'map-back',
-  MapBackWzFile: 'Map\\Back\\Back_009.wz',
+  MapBackWzFile: 'Map\\Back',
   MapBackPath: '',
   MapBackTypes: [
     'myHome.img',
@@ -52,32 +56,27 @@ export default {
   ],
 
   MapObjOutput: 'map-object',
-  MapObjWzFile: 'Map\\Obj\\Obj_016.wz',
+  MapObjWzFile: 'Map\\Obj',
   MapObjPath: '',
-  MapObjTypes: ['myHome.img'],
-
-  Map2ObjOutput: 'map-object',
-  Map2ObjWzFile: 'Map\\Obj\\Obj_017.wz',
-  Map2ObjPath: '',
-  Map2ObjTypes: ['myHome2.img'],
+  MapObjTypes: ['myHome.img', 'myHome2.img'],
 
   FurnitureOutput: 'furniture',
-  FurnitureWzFile: 'Item\\Consume\\Consume_000.wz',
+  FurnitureWzFile: 'Item\\Consume',
   FurniturePath: '',
   FurnitureTypes: ['0267.img'],
 
   ThemeUIOutput: 'theme-ui',
-  ThemeUIWzFile: 'Item\\Consume\\Consume_000.wz',
+  ThemeUIWzFile: 'Item\\Consume',
   ThemeUIPath: '',
   ThemeUITypes: ['0267.img'],
 
   StringOutput: 'furniture-string',
-  StringWzFile: 'String\\String_000.wz',
+  StringWzFile: 'String',
   StringPath: 'Consume',
   StringTypes: ['Consume.img'],
 
   ThemeOutput: 'map-theme',
-  ThemeWzFile: 'Etc\\Etc_003.wz',
+  ThemeWzFile: 'Etc',
   ThemePath: 'Construction',
   ThemeTypes: ['myHome.img'],
 } as const;

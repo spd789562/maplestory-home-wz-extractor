@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 import ParserBase from './base';
+import type { default as WzDataTree } from '../modules/WzDataTree';
 
 import Config from '../../config';
 
@@ -9,8 +10,8 @@ const wzPath = path.join(Config.WZ_SOURCE, Config.HouseMapWzFile);
 
 class MapParser extends ParserBase {
   saveRoot: string;
-  constructor() {
-    super(Config.HouseMapWzFile, wzPath);
+  constructor(wzData: WzDataTree) {
+    super(Config.HouseMapWzFile, wzPath, wzData);
     this.saveRoot = path.join(Config.OUTPUT_ROOT, Config.MapOutput);
   }
   async saveJson() {

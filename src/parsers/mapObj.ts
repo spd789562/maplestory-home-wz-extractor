@@ -1,16 +1,17 @@
 import path from 'path';
 import fs from 'fs';
+import { Canvas } from '@tybys/wz';
 
 import ParserBase from './base';
+import type { default as WzDataTree } from '../modules/WzDataTree';
 
 import Config from '../../config';
 
 const wzPath = path.join(Config.WZ_SOURCE, Config.MapObjWzFile);
-const wz2Path = path.join(Config.WZ_SOURCE, Config.Map2ObjWzFile);
 
 function parseImageName(name: string, file: string) {
   return name
-    .replace(Config.WZ_SOURCE.replace(/^\.\//, '') + '\\', '')
+    .replace(`${Config.WZ_SOURCE.replace(/^\.\//, '')}\\`, '')
     .replace(file, 'Map2-Obj')
     .replace(/\\(\\)?/g, '-');
 }
@@ -22,15 +23,15 @@ class MapObjParser extends ParserBase {
   saveImageRoot: string;
   file: string;
   objTypes: any;
-  constructor(type = 1) {
-    super(Config.MapObjWzFile, type === 1 ? wzPath : wz2Path);
-    this.file = type === 1 ? Config.MapObjWzFile : Config.Map2ObjWzFile;
-    this.objTypes = type === 1 ? Config.MapObjTypes : Config.Map2ObjTypes;
+  constructor(wzData: WzDataTree) {
+    super(Config.MapObjWzFile, wzPath, wzData);
+    this.file = Config.MapObjWzFile;
+    this.objTypes = Config.MapObjTypes;
     this.saveRoot = path.join(Config.OUTPUT_ROOT, Config.MapObjOutput);
     this.saveImageRoot = path.join(
       Config.OUTPUT_ROOT,
       'images',
-      Config.MapObjOutput
+      Config.MapObjOutput,
     );
   }
   async saveJson() {
@@ -40,7 +41,7 @@ class MapObjParser extends ParserBase {
       const wzPath = Config.MapObjPath
         ? `${Config.MapObjPath}\\${typeName}`
         : typeName;
-      const typeJson = await this.getJson(wzPath);
+      const typeJson = (await this.getJson(wzPath)) as unknown as any;
       delete typeJson.Obj;
       delete typeJson.direction;
       // delete typeJson.Plaza;
@@ -50,14 +51,12 @@ class MapObjParser extends ParserBase {
       fs.writeFileSync(savePath, JSON.stringify(typeJson, null, 2));
     }
   }
-  imageCallback(name: string, bitmap: any) {
+  imageCallback(name: string, bitmap: Canvas) {
     const saveName = parseImageName(name, this.file);
     if (ignoreList.some((item) => saveName.includes(`.img-${item}`))) {
       return;
     }
-    bitmap &&
-      bitmap.writeAsync &&
-      bitmap.writeAsync(path.join(this.saveImageRoot, `${saveName}.png`));
+    bitmap?.writeAsync?.(path.join(this.saveImageRoot, `${saveName}.png`));
   }
 }
 

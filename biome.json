@@ -1,0 +1,29 @@
+{
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "lineWidth": 80,
+      "indentWidth": 2
+    },
+    "linter": {
+      "enabled": true,
+      "rules": {
+        "performance": {
+          "noDelete": "off"
+        },
+        "suspicious": {
+          "noExplicitAny": "off"
+        }
+      }
+    },
+    "organizeImports": {
+      "enabled": true
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "trailingComma": "all",
+            "jsxQuoteStyle": "double"
+        }
+    }
+  }

@@ -18,3 +18,4 @@ yarn-error.log*
 
 # self usage
 wzSource
+!biome.json

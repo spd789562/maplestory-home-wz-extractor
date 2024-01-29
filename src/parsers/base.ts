@@ -19,6 +19,7 @@ import {
   isProperty,
   isCanvasProperty,
   isVectorProperty,
+  isUOLProperty,
 } from '../util/propertyHelper';
 
 function preventBigIntSave(value: number | bigint) {
@@ -193,7 +194,8 @@ class ParserBase {
             typeof value === 'string' &&
             obj.name !== '_inlink' &&
             obj.name !== '_outlink' &&
-            value.startsWith('.');
+            value.startsWith('.') &&
+            isUOLProperty(obj);
           /* need to take care relative path value, it stupid */
           if (isRelativePath) {
             const path = this.getByRelativePath(obj, `..\\${value}`);

@@ -15,29 +15,29 @@ async function job() {
   using WzData = new WzDataTree(Config.WZ_SOURCE, Config.WZ_VERSION);
   await WzData.initialize();
 
-  // {
-  //   using mapWz = new MapParser(WzData);
-  //   await mapWz.initialize();
-  //   await mapWz.saveJson();
-  // }
+  {
+    using mapWz = new MapParser(WzData);
+    await mapWz.initialize();
+    await mapWz.saveJson();
+  }
 
-  // {
-  //   using mapBackWz = new MapBackParser(WzData);
-  //   await mapBackWz.initialize();
-  //   await mapBackWz.saveJson();
-  // }
+  {
+    using mapBackWz = new MapBackParser(WzData);
+    await mapBackWz.initialize();
+    await mapBackWz.saveJson();
+  }
 
-  // {
-  //   using mapObjWz = new MapObjParser(WzData);
-  //   await mapObjWz.initialize();
-  //   await mapObjWz.saveJson();
-  // }
+  {
+    using mapObjWz = new MapObjParser(WzData);
+    await mapObjWz.initialize();
+    await mapObjWz.saveJson();
+  }
 
-  // {
-  //   using furnitureWz = new FurnitureParser(WzData);
-  //   await furnitureWz.initialize();
-  //   await furnitureWz.saveJson();
-  // }
+  {
+    using furnitureWz = new FurnitureParser(WzData);
+    await furnitureWz.initialize();
+    await furnitureWz.saveJson();
+  }
 
   {
     using stringWz = new StringParser(WzData);
@@ -45,11 +45,11 @@ async function job() {
     await stringWz.saveJson();
   }
 
-  // {
-  //   using themeWz = new ThemeParser(WzData);
-  //   await themeWz.initialize();
-  //   await themeWz.saveJson();
-  // }
+  {
+    using themeWz = new ThemeParser(WzData);
+    await themeWz.initialize();
+    await themeWz.saveJson();
+  }
 
   return true;
 }
